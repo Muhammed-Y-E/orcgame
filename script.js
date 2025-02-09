@@ -1,4 +1,6 @@
 let x = 0;
+let left = 100;
+let bottom = 250;
 
 // setInterval(moveCharacter, 75);
 
@@ -10,26 +12,36 @@ function checkKey(e) {
 
     if (e.keyCode == '38') {
         // up arrow
+        bottom += 5;
+        moveCharacter();
+        orc.style.bottom = `${bottom}px`
     }
     else if (e.keyCode == '40') {
         // down arrow
+        bottom -= 5;
+        moveCharacter();
+        orc.style.bottom = `${bottom}px`
     }
     else if (e.keyCode == '37') {
-       // left arrow
-       moveCharacter();
+        // left arrow
+        left -= 5;
+        moveCharacter();
+        orc.style.left = `${left}px`;
     }
     else if (e.keyCode == '39') {
-       // right arrow
-       moveCharacter();
+        // right arrow
+        left += 5;
+        moveCharacter();
+        orc.style.left = `${left}px`;
     }
 }
 
 
 function moveCharacter() {
-    orc.style = `object-position: -${x * 200}px;`;
+    orc.style.objectPosition =  `-${x * 200}px`;
     x++;
 
-    if(x == 7) {
+    if (x == 7) {
         x = 0;
     }
 }
