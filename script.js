@@ -105,3 +105,11 @@ function moveCharacter() {
         x = 0;
     }
 }
+
+
+
+// Aufgaben, gucken, ob man das selber machen kann.
+// - Alle 5 Sekunden soll der Berserk ganz rechts im Bild (leicht außerhalb des sichtbareren Bereichs) spawnen
+// - Der Berserk soll auf einer zufälligen Höhe erscheinen (Y Koordinate)
+// - Der Berserk soll animiert sein, genau wie der Character
+// - der Berserk soll automatisch schnell nach links laufen
