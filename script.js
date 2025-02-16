@@ -12,27 +12,50 @@ let berserkLeft = window.innerWidth; // Startet außerhalb des sichtbaren Bereic
 let berserkBottom = getRandomY(); // Zufällige Höhe für den Berserk
 let gameOver = false; // Zustand für Spielende
 let berserkHit = false;
-
+let backgroundMusic = new Audio('audio/sport-trailer.mp3');
+let audioRun = new Audio('audio/wood-steps.mp3');
+let audioAttack = new Audio('audio/small-monster-attack.mp3');
+backgroundMusic.play(); 
 document.onkeydown = checkKey;
 document.onkeyup = unCheckKey;
+
+
+
+backgroundMusic.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+
+
+
+
 
 let spawnInterval = setInterval(spawnBerserk, 5000); 
 
 function checkKey(e) {
     e = e || window.event;
-
+     if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        audioRun.play();
+    }
+        
     if (e.keyCode == '38') {
         topArrow = true;
+        audioRun.play();
     }
     else if (e.keyCode == '40') {
         bottomArrow = true;
+        audioRun.play();
     }
     else if (e.keyCode == '37') {
         leftArrow = true;
+        audioRun.play();
 
     }
     else if (e.keyCode == '39') {
         rightArrow = true;
+        audioRun.play();
+
     } else if (e.keyCode == '68') { // 'd' Taste
         if (!attacking) {
             attack = true;
@@ -52,16 +75,23 @@ function unCheckKey(e) {
 
     if (e.keyCode == '38') {
         topArrow = false;
+        audioRun.pause();
+        audioRun.currentTime = 0;
     }
     else if (e.keyCode == '40') {
         bottomArrow = false;
+        audioRun.pause();
+        audioRun.currentTime = 0;
     }
     else if (e.keyCode == '37') {
         leftArrow = false;
-
+        audioRun.pause();
+        audioRun.currentTime = 0;
     }
     else if (e.keyCode == '39') {
         rightArrow = false;
+        audioRun.pause();
+        audioRun.currentTime = 0;
     }
 }
 
@@ -76,6 +106,8 @@ function checkCollision() {
     if (isCollision('orc', 'berserk')) {
         if (attacking && !berserkHit) {
             berserkHit = true;
+            audioAttack.currentTime = 0;
+            audioAttack.play();
             // Berserk stirbt
             clearInterval(berserkMovementInterval); // Berserk stoppt seine Bewegung
             clearInterval(spawnInterval);
